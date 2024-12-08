@@ -35,7 +35,7 @@ class Player(pygame.sprite.Sprite):
         self.image = self.game.character_spritesheet.get_sprite(0, 0, c.PLAYER_WIDTH, c.PLAYER_HEIGHT)
 
         self.rect = self.image.get_rect()
-        self.rect.x = self.x
+        self.rect.x = self.x 
         self.rect.y = self.y
         
         self.down_animations = [
@@ -172,7 +172,7 @@ class Player(pygame.sprite.Sprite):
 
 
 class Block(pygame.sprite.Sprite):
-    def  __init__(self, game, x, y):
+    def  __init__(self, game, x, y, xx, yy):
 
         self.game = game
         self._layer = c.BLOCK_LAYER
@@ -184,7 +184,7 @@ class Block(pygame.sprite.Sprite):
         self.width = c.TILESIZE
         self.height = c.TILESIZE
 
-        self.image = self.game.terrain_spritesheet.get_sprite(961, 448, self.width, self.height)
+        self.image = self.game.terrain_spritesheet.get_sprite(xx, yy, self.width, self.height)
 
         self.rect = self.image.get_rect()
         self.rect.x = self.x
@@ -202,7 +202,7 @@ class Ground(pygame.sprite.Sprite):
         self.width = c.TILESIZE
         self.height = c.TILESIZE
 
-        self.image = self.game.terrain_spritesheet.get_sprite(64, 352, self.width, self.height)
+        self.image = self.game.terrain_spritesheet.get_sprite(0, 0, self.width, self.height)
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y

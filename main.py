@@ -15,25 +15,30 @@ class Game:
         self.font = pygame.font.Font('dogica.ttf', 32)
         
         self.character_spritesheet = Spritesheet('img/mel_spritesheet.png')
-        self.terrain_spritesheet = Spritesheet('img/terrain.png')
+        self.terrain_spritesheet = Spritesheet('img/terrain1.png')
 
     def createTilemap(self):
         for i, row in enumerate(c.TILEMAP):
             for j, column in enumerate(row):
                 Ground(self, j, i)
-                if column == "B":
-                    Block(self, j, i)
+                if column == "W":
+                    Block(self, j, i, 32, 0)
+                if column == "E":
+                    Block(self, j, i, 64, 0)
+                if column == "T":
+                    Block(self, j, i, 287, 0)
+                if column == "2":
+                    Block(self, j, i, 96, 0)
+                if column == "1":
+                    Block(self, j, i, 128, 0)
                 if column == "P":
                     Player(self, j, i)
 
     def new(self):
         self.all_sprites = pygame.sprite.LayeredUpdates()
         self.blocks = pygame.sprite.LayeredUpdates()
-        self.createTilemap()
+        self.screen.blit(self.createTilemap(), 120, 120)
         self.playing = True
-        self.createTilemap()
-        
-        
 
     def events(self):
         # game loop events
@@ -67,7 +72,7 @@ class Game:
     def intro_screen(self):
         intro = True
 
-        title = self.font.render('La Llave de Atras', True, c.BLACK)
+        title = self.font.render('La Llave de Atrás', True, c.BLACK)
         title_rect = title.get_rect(x=10, y=10)
 
         play_button = Button(c.DISPLAY_WIDTH//2-100, c.DISPLAY_HEIGHT//2, 200, 100, c.WHITE, c.BLACK, 'Jugar', 32)
