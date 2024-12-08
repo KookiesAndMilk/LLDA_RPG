@@ -1,9 +1,5 @@
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 640
-TILESIZE = 32
-PLAYER_WIDTH=20
-PLAYER_HEIGHT=30
-FPS = 60
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -14,17 +10,4 @@ PLAYER_LAYER = 3
 BLOCK_LAYER = 2
 GROUND_LAYER = 1
 
-PLAYER_SPEED = 1
-
-TILEMAP = [
-'WWWWWWWWWW',
-'W........W',
-'W........W',
-'W........W',
-'W...P....W',
-'W........W',
-'W........W',
-'W........W',
-'W........W',
-'WWWWWWWWWW'
-]
+PLAYER_SPEED = 2
