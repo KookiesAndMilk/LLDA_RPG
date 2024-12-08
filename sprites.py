@@ -5,10 +5,10 @@ import math
 import random
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, file, x, y):
+    def __init__(self,file, x, y):
         super(Player, self).__init__()
         self.image = pygame.image.load(file).convert()
-        self.image = pygame.transform.scale_by(self.image, (self.image.get_width()*0.15, self.image.get_height()*0.1))
+        self.image = pygame.transform.scale_by(self.image, (self.image.get_width()*0.13, self.image.get_height()*0.1))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -17,6 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.vel_y = 0
         self.image.set_colorkey(c.WHITE)
         self.facing = 'down'
+    
 
     def movement(self):
         keys = pygame.key.get_pressed()
@@ -26,15 +27,19 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_a]:
             self.vel_x = - self.speed
             self.facing = 'left'
+            return 'left'
         elif keys[pygame.K_d]:
             self.vel_x = + self.speed
             self.facing = 'right'
+            return 'right'
         elif keys[pygame.K_w]:
             self.vel_y = - self.speed
             self.facing = 'up'
+            return 'up'
         elif keys[pygame.K_s]:
             self.vel_y = + self.speed
             self.facing = 'down'
+            return 'down'
         else:
             self.vel_x = 0
             self.vel_y = 0

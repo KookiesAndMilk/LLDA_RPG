@@ -1,5 +1,5 @@
 import pygame
-from spritess import *
+from sprites import *
 from background import *
 import config as c
 
@@ -14,7 +14,7 @@ CLOCK = pygame.time.Clock()
 # Object setup
 # Sprites for Players or NPCs
 sprite_group = pygame.sprite.Group()
-mel = Player('img/mel_single.png', 200, 200)
+mel = Player('img/mel_spritesheet.png', 200, 200)
 tah = Player('img/tah_single.png', 160, 100)
 eb = Player('img/eb_single.png', 220, 100)
 daniel = Player('img/daniel_single.png', 280, 100)
@@ -46,6 +46,14 @@ while running:
             running = False
             quit()
         mel.movement()
+        if mel.movement() == 'down':
+            print('down')
+        if mel.movement() == 'up':
+            print('up')
+        if mel.movement() == 'left':
+            print('left')
+        if mel.movement() == 'right':
+            print('right')
 
     # Update all the objects
     sprite_group.update()
