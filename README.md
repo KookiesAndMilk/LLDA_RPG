@@ -10,7 +10,7 @@ Para jugar debe tener instalada la librería Pygame, si es así:
 
 ## ¿Cómo jugar?
 La llave de Atrás es un RPG y Novela Visual que trata sobre la cooperación de una clase para salir de una dimensión rara a donde llegaron de una manera aun más rara. 
-- (8-dic-2024) Siga las instrucciones de la pantalla para completar el primer puzzle.
+- (9/dic/2024) Las mecanicas implementadas al momento son: multiples escenas, puzzle del ahorcado.
 - Puede moverse con la combinación de teclas W, A, S, D para moverse arriba, abajo, izquierda y derecha, respectivamente.
 
 ## Feedback y comentarios.

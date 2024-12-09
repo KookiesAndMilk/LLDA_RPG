@@ -9,15 +9,12 @@ def mostrar_menu(screen, clock, fuente, fuente_bold, imagen_fondo, imagen_mel):
     opciones = ["Comenzar", "Cargar", "Salir"]
     opcion_elegida = 0
     corriendo = True
-    
-    fuente_titulo = pygame.font.Font(None, 48)  # Fuente para el título
-
-
 
     while corriendo:
         screen.fill(NEGRO)
-        screen.blit(imagen_fondo, (100, 50))  # Posiciona la imagen del fondo
-        screen.blit(imagen_mel, (50, 90))    # Posiciona la imagen de Mel
+        screen.blit(imagen_fondo, (0, 0))  # Posiciona la imagen del fondo
+        screen.blit(imagen_mel, (0, 340))    # Posiciona la imagen de Mel
+
         for i, opcion in enumerate(opciones):
             if i == opcion_elegida:
                 texto = fuente_bold.render(opcion, True, MULTI3)
@@ -41,3 +38,4 @@ def mostrar_menu(screen, clock, fuente, fuente_bold, imagen_fondo, imagen_mel):
 
         pygame.display.flip()
         clock.tick(60)
+    return mostrar_menu ()

@@ -2,6 +2,7 @@ import pygame
 from sprites import *
 from background import *
 from arrows import Arrow
+from main_menu import mostrar_menu
 import config as c
 import random
 
@@ -19,16 +20,33 @@ opcion_correcta = random.randrange(0, 3)
 
 #### Object setup ####
 
+# Configuración de pantalla
+screen = DISPLAY
+pygame.display.set_caption("La llave de atrás")
+
+# Reloj y fuentes
+clock = pygame.time.Clock()
+fuente = pygame.font.Font("dogica.ttf", 25)
+fuente_bold = pygame.font.Font("dogicabold.ttf", 25)
+
+# Carga de imágenes
+imagen_fondo = pygame.image.load('img/terrain/main_menu_bg.png').convert_alpha()
+imagen_mel = pygame.image.load('img/terrain/main_menu_mel.png').convert_alpha()
+
+# Mostrar el menú
+opcion = mostrar_menu(screen, clock, fuente, fuente_bold, imagen_fondo, imagen_mel)
+
+if opcion == 0:
+    print("Comenzar juego")
+elif opcion == 1:
+    print("Cargar partida")
+elif opcion == 2:
+    pygame.quit()
+
 # Display and Scene Management
 
-INTRO = True
 SALONIM3 = True
 PASILLO = False
-
-# Main Menu Setup
-
-main_menu_mel = pygame.image.load('img/terrain/main_menu_mel.png').convert_alpha()
-main_menu_bg = pygame.image.load('img/terrain/main_menu_bg.png').convert()
 
 # Sprites for Players or NPCs
 
@@ -256,11 +274,6 @@ while running:
     # Check for Game Over
 
     # Render the Display
-    if INTRO:
-        SALONIM3 = False
-        DISPLAY.blit(main_menu_bg, (0,0))
-        DISPLAY.blit(main_menu_mel, (0, 340))
-    elif not INTRO:
         SALONIM3=True
         DISPLAY.fill(c.BLACK)
     if SALONIM3:
