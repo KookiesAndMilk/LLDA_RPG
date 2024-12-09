@@ -5,9 +5,13 @@ class BG(pygame.sprite.Sprite):
     def __init__(self, file, x, y, colour):
         super(BG, self).__init__()
         self.image = pygame.image.load(file).convert()
+<<<<<<< HEAD
+        self.image = pygame.transform.scale_by(self.image, (self.image.get_width()*0.011, self.image.get_height()*0.011))
+=======
         self.width = self.image.get_width()
         self.height = self.image.get_height()
         self.image = pygame.transform.scale_by(self.image, (self.width*0.011, self.height*0.011))
+>>>>>>> 9a19b6ee5ecabc4bb45ba2f37ee36b50ab591438
         self.image.set_colorkey(colour)
 
         self.rect = self.image.get_rect()
