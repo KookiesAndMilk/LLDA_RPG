@@ -1,5 +1,6 @@
 import pygame
 
+
 def mostrar_menu():
     pygame.init()
 
@@ -13,21 +14,12 @@ def mostrar_menu():
     BLANCO = (255, 255, 255)
 
      # Cargar imágenes
-<<<<<<< HEAD
-    fondo_rect = pygame.image.load('img/terrain/main_menu_bg.png')  # Reemplaza con la imagen del rectángulo
-    mel_bg = pygame.image.load('img/terrain/main_menu_mel.png')    # Imagen de Mel
-
-    # Escalar imágenes si es necesario
-    fondo_rect = pygame.transform.scale(fondo_rect, (400, 200))  # Tamaño del rectángulo
-    mel_bg = pygame.transform.scale(mel_bg, (125, 150))          # Tamaño de Mel
-=======
     fondo_rect = pygame.image.load('LLDA_RPG-main/img/main_menu_bg.png')  # Reemplaza con la imagen del rectángulo
     mel_bg = pygame.image.load('LLDA_RPG-main/img/main_menu_mel.png')    # Imagen de Mel
 
     # Escalar imágenes si es necesario
     fondo_rect = pygame.transform.scale(fondo_rect, (400, 200))  # Tamaño del rectángulo
     mel_bg = pygame.transform.scale(mel_bg, (120, 200))          # Tamaño de Mel
->>>>>>> b7366db0369131360d60ae24e638e870659ad451
 
     # Fuentes
     fuente_titulo = pygame.font.Font(None, 48)  # Fuente para el título
@@ -92,8 +84,4 @@ def mostrar_menu():
 
     pygame.quit()
 
-<<<<<<< HEAD
-    return seleccion_actual()
-=======
-    return mostrar_menu ()
->>>>>>> b7366db0369131360d60ae24e638e870659ad451
+    return seleccion_actual ()

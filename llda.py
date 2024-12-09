@@ -1,18 +1,12 @@
 import pygame
 from sprites import *
 from background import *
-<<<<<<< HEAD
 import config as c
 from main_menu import mostrar_menu
 
-=======
 from arrows import Arrow
 import config as c
-<<<<<<< HEAD
 from main_menu import mostrar_menu
-=======
->>>>>>> 9a19b6ee5ecabc4bb45ba2f37ee36b50ab591438
->>>>>>> b7366db0369131360d60ae24e638e870659ad451
 
 # Pygame Initialization
 pygame.init()
@@ -25,9 +19,6 @@ CLOCK = pygame.time.Clock()
 
 #### Object setup ####
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 # Sprites for Players or NPCs
 mel = Player(200, 200, (c.BLACK), 'LLDA_RPG-main/img/mel_spritesheet.png')
 
@@ -91,19 +82,7 @@ elif opcion == 1:
 elif opcion == 2:
     pygame.quit()
 
-# The Game
-running = True
-while running:
-    # Tick Clock
-    CLOCK.tick(FPS)
-    # Handle Events
-    for event in pygame.event.get():
-=======
 # Display and Scene Management
-
-INTRO = True
-SALONIM3 = True
-PASILLO = False
 
 # Main Menu Setup
 
@@ -115,7 +94,6 @@ text_group = pygame.sprite.Group()
 text_group.add(button)
 text_group.add(title)
 
->>>>>>> b7366db0369131360d60ae24e638e870659ad451
 # Sprites for Players or NPCs
 
 mel = Player(250, 250, (c.BLACK), 'img/walking_sprites/mel_spritesheet.png')
@@ -207,20 +185,10 @@ while running:
     for event in pygame.event.get():
 
         keys = pygame.key.get_pressed()
->>>>>>> 9a19b6ee5ecabc4bb45ba2f37ee36b50ab591438
         if event.type == pygame.QUIT:
             pygame.quit()
             running = False
             quit()
-<<<<<<< HEAD
-        mel.limits()
-
-        keys = pygame.key.get_pressed()
-        if not keys:
-            mel.vel_x = 0
-            mel.vel_y = 0
-
-=======
         if event.type == pygame.key:
             if keys[pygame.K_ESCAPE]:
                 pygame.quit()
@@ -237,7 +205,6 @@ while running:
         if keys[pygame.K_SPACE]:
             INTRO=False
             
->>>>>>> 9a19b6ee5ecabc4bb45ba2f37ee36b50ab591438
         if keys[pygame.K_a]:
             mel.vel_x = - mel.speed
             mel.facing = 'left'
@@ -255,19 +222,12 @@ while running:
             mel.vel_y = 0
 
     # Update all the objects
-<<<<<<< HEAD
-    sprite_group.update()
-    bg_group.update()
-
-    # Check collissions
-=======
 
     sprite_group.update()
     bg_group.update()
 
     # Check collissions
 
->>>>>>> 9a19b6ee5ecabc4bb45ba2f37ee36b50ab591438
     if pygame.sprite.collide_rect(mel, tah):
         mel.vel_x = 0
         mel.vel_y = 0
@@ -291,7 +251,6 @@ while running:
         mel.vel_y = 0
     if pygame.sprite.collide_rect(mel, ass_5):
         mel.vel_x = 0
-<<<<<<< HEAD
         mel.vel_y = 0   
 
     # Render the Display
@@ -299,8 +258,7 @@ while running:
     bg_group.draw(DISPLAY)
     sprite_group.draw(DISPLAY)
     pygame.display.update()
-=======
-        mel.vel_y = 0 
+    mel.vel_y = 0 
     if pygame.sprite.collide_rect(mel, arrow_up):
         ass_1.out(), ass_2.out(), ass_3.out(), ass_4.out(), ass_5.out(), ass_6.out()
 
@@ -332,14 +290,6 @@ while running:
 
     # Render the Display
         DISPLAY.fill(c.BLACK)
-<<<<<<< HEAD
         bg_group.draw(DISPLAY)
         sprite_group.draw(DISPLAY)
     pygame.display.update()
-=======
-    if SALONIM3:
-        bg_group_1.draw(DISPLAY)
-        sprite_group_1.draw(DISPLAY)
-    pygame.display.update()
->>>>>>> 9a19b6ee5ecabc4bb45ba2f37ee36b50ab591438
->>>>>>> b7366db0369131360d60ae24e638e870659ad451
