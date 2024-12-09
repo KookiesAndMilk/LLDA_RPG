@@ -11,7 +11,24 @@ DISPLAY = pygame.display.set_mode((c.DISPLAY_WIDTH, c.DISPLAY_HEIGHT))
 FPS = 60
 CLOCK = pygame.time.Clock()
 
-# Object setup
+#### Object setup ####
+
+# Display and Scene Management
+INTRO = True
+SALONIM3 = True
+
+# Illustrations
+
+main_menu_mel = pygame.image.load('img/main_menu_mel.png').convert_alpha()
+main_menu_bg = pygame.image.load('img/main_menu_bg.png').convert()
+title = Text("La Llave de Atrás",'dogicabold.ttf', c.WHITE, 32, 50, 30)
+button = Text("Pulse 'ESPACIO' para comenzar", 'dogica.ttf', c.BLACK, 16, 200, 440)
+text_group = pygame.sprite.Group()
+text_group.add(button)
+text_group.add(title)
+
+
+
 # Sprites for Players or NPCs
 mel = Player(200, 200, (c.BLACK), 'img/mel_spritesheet.png')
 
@@ -64,6 +81,9 @@ while running:
         if not keys:
             mel.vel_x = 0
             mel.vel_y = 0
+
+        if keys[pygame.K_SPACE]:
+            INTRO=False
             
         if keys[pygame.K_a]:
             mel.vel_x = - mel.speed
@@ -114,7 +134,12 @@ while running:
     # Check for Game Over
 
     # Render the Display
-    DISPLAY.fill(c.BLACK)
-    bg_group.draw(DISPLAY)
-    sprite_group.draw(DISPLAY)
+    if INTRO:
+        DISPLAY.blit(main_menu_bg, (0,0))
+        DISPLAY.blit(main_menu_mel, (0, 340))
+        text_group.draw(DISPLAY)
+    elif not INTRO:
+        DISPLAY.fill(c.BLACK)
+        bg_group.draw(DISPLAY)
+        sprite_group.draw(DISPLAY)
     pygame.display.update()

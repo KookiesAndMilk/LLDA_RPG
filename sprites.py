@@ -97,3 +97,30 @@ class Player(pygame.sprite.Sprite):
         self.animation()
         self.rect.x += self.vel_x
         self.rect.y += self.vel_y
+
+class Text(pygame.sprite.Sprite):
+    def __init__(self, content, font, fg, fs, x, y):
+        super(Text, self).__init__()
+        self.content = content
+        self.color = fg
+        self.font_size = fs
+        self.font = font
+        self.font = pygame.font.Font(self.font, self.font_size)
+        
+        self.x_pad = 20
+        self.y_pad = 13
+
+        self.image = self.font.render(content, True, self.color)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+    
+    def update(self):
+        pass
+
+    def is_pressed(self, pos, pressed):
+        if pos[0] in range (self.rect.left, self.rect.right) and pos [1] in range(self.rect.top, self.rect.bottom):
+            if pressed[0]:
+                return True
+        return False
