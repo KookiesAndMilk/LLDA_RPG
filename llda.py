@@ -4,6 +4,7 @@ from background import *
 import config as c
 from main_menu import mostrar_menu
 
+
 # Pygame Initialization
 pygame.font.init()
 
