@@ -3,8 +3,10 @@ from sprites import *
 from background import *
 from arrows import Arrow
 import config as c
+from main_menu import mostrar_menu
 
 # Pygame Initialization
+pygame.init()
 pygame.font.init()
 
 # Display setup
@@ -14,48 +16,30 @@ CLOCK = pygame.time.Clock()
 
 #### Object setup ####
 
-# Display and Scene Management
-
-INTRO = True
-SALONIM3 = True
-PASILLO = False
-
-# Main Menu Setup
-
-main_menu_mel = pygame.image.load('img/terrain/main_menu_mel.png').convert_alpha()
-main_menu_bg = pygame.image.load('img/terrain/main_menu_bg.png').convert()
-title = Text("La Llave de Atrás",'dogicabold.ttf', c.WHITE, 32, 50, 30)
-button = Text("Pulse 'ESPACIO' para comenzar", 'dogica.ttf', c.BLACK, 16, 200, 440)
-text_group = pygame.sprite.Group()
-text_group.add(button)
-text_group.add(title)
-
 # Sprites for Players or NPCs
 
-mel = Player(400, 250, (c.BLACK), 'img/walking_sprites/mel_spritesheet.png')
+mel = Player(250, 250, (c.BLACK), 'img/walking_sprites/mel_spritesheet.png')
 
 tah = NPC('img/walking_sprites/tah_single.png', 570, 250)
 eb = NPC('img/walking_sprites/eb_single.png', 570, 450)
 daniel = NPC('img/walking_sprites/daniel_single.png', 530, 450)
 
-sprite_group_1 = pygame.sprite.Group()
-sprite_group_1.add(mel)
-sprite_group_1.add(tah)
-sprite_group_1.add(eb)
-sprite_group_1.add(daniel)
+sprite_group = pygame.sprite.Group()
+sprite_group.add(mel,tah,eb,daniel)
 
 # Usables
 
 arrow_up = Arrow('img/assets/teleporter_up.png', 230, 200)
-arrow_down = Arrow('img/assets/teleporter_down.png', 800, 800)
+arrow_down = Arrow('img/assets/teleporter_down.png', 300, 410)
 arrow_left = Arrow('img/assets/teleporter_left.png', 800, 800)
-arrow_right = Arrow('img/assets/teleporter_right.png', 800, 800)
+arrow_right = Arrow('img/assets/teleporter_right.png', 340, 370)
 
-sprite_group_1.add(arrow_up)
+sprite_group.add(arrow_up)
 
 # Sprites for Scenes
 bg_1 = BG('img/terrain/salon_piso.png', 120, 200, c.WHITE)
 bg_2 = BG('img/terrain/salon_pared_im3.png', 120, 64, c.BLUE)
+
 ass_1 = Asset('img/assets/salon_banca1.png', 500, 340)
 ass_2 = Asset('img/assets/salon_banca1.png', 500, 400)
 ass_3 = Asset('img/assets/salon_bancas.png', 419, 400)
@@ -63,14 +47,51 @@ ass_4 = Asset('img/assets/salon_bancas.png', 338, 400)
 ass_5 = Asset('img/assets/salon_bancas.png', 257, 400)
 ass_6 = Asset('img/assets/salon_banca1.png', 257, 340)
 
-bg_3 = BG('img/terrain/pasillo.png', 120, 64, c.BLACK)
+bg_3 = BG('img/terrain/pasillo.png', 197, 20, c.BLACK)
+bg_3.scale_by(0.0248, 0.0055)
 
-bg_group_1 = pygame.sprite.Group()
-bg_group_1.add(bg_1, bg_2)
+bg_4 = BG('img/terrain/salon_pared_im5.png', 120, 64, c.BLUE)
+ass_7 = Asset('img/assets/salon_banca1.png', 500, 430) # Banca Alberto
+ass_8 = Asset('img/assets/salon_banca3.png', 218, 400) # Banca Marco
+ass_9 = Asset('img/assets/salon_banca1.png', 218, 230) # Banca Diego
+ass_10 = Asset('img/assets/salon_banca1.png', 500, 230) # Banca Dania
+ass_11 = Asset('img/assets/salon_bancas.png', 500, 525) # Escritorio
 
-bg_group_2 = pygame.sprite.Group()
+dania = NPC('img/walking_sprites/dania_single.png', 515, 200)
+diego = NPC('img/walking_sprites/diego_single.png', 200, 210)
+alberto = NPC('img/walking_sprites/alberto_single.png', 470, 400)
+mario = NPC('img/walking_sprites/mario_single.png', 400, 505)
 
-sprite_group_1.add(ass_1, ass_2, ass_3, ass_4, ass_5, ass_6)
+bg_group = pygame.sprite.Group()
+bg_group.add(bg_1, bg_2)
+
+sprite_group.add(ass_1, ass_2, ass_3, ass_4, ass_5, ass_6)
+
+#main menu
+
+# Configuración de pantalla
+
+pygame.display.set_caption("La Llave de Atrás")
+
+# Reloj y fuentes
+fuente = pygame.font.Font('dogica.ttf', 25)
+fuente_bold = pygame.font.Font('dogicabold.ttf', 25)
+
+# Carga de imágenes
+imagen_fondo = pygame.image.load('img/terrain/main_menu_bg.png').convert_alpha()
+imagen_mel = pygame.image.load('img/terrain/main_menu_mel.png').convert_alpha()
+
+# Mostras el menú
+opcion = mostrar_menu()
+
+if opcion == 0:
+    print('Comenzando')
+
+elif opcion == 1:
+    print('Cargar partida')
+
+elif opcion == 2:
+    pygame.quit()
 
 ################## THE GAME ##################
 
@@ -84,6 +105,7 @@ while running:
     # Handle Events
     
     for event in pygame.event.get():
+
         keys = pygame.key.get_pressed()
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -96,8 +118,6 @@ while running:
                 quit()
 
         # Player movement
-        if SALONIM3:
-            mel.limits(120, 630, 180, 550)
 
         if not keys:
             mel.vel_x = 0
@@ -125,9 +145,8 @@ while running:
 
     # Update all the objects
 
-    sprite_group_1.update()
-    bg_group_1.update()
-    bg_group_2.update()
+    sprite_group.update()
+    bg_group.update()
 
     # Check collissions
 
@@ -156,23 +175,36 @@ while running:
         mel.vel_x = 0
         mel.vel_y = 0 
     if pygame.sprite.collide_rect(mel, arrow_up):
-        bg_group_1.add(bg_3)
-        bg_group_1.remove(bg_1, bg_2)
-        sprite_group_1.remove(ass_1, ass_2, ass_3, ass_4, ass_5, ass_6)
-        sprite_group_1.remove(arrow_up)
+        ass_1.out(), ass_2.out(), ass_3.out(), ass_4.out(), ass_5.out(), ass_6.out()
+
+        tah.out(), eb.out(), daniel.out()
+
+        bg_group.add(bg_3)
+        bg_group.remove(bg_1, bg_2)
+        sprite_group.empty()
+        sprite_group.add(mel,arrow_right, arrow_down)
+        mel.door(250, 360)
+
+    if pygame.sprite.collide_rect(mel, arrow_right):
+        bg_group.remove(bg_3)
+        sprite_group.remove(arrow_right, arrow_down)
+        bg_group.add(bg_1, bg_4)
+        arrow_right.out(), arrow_down.out()
+        sprite_group.add(ass_7, ass_8, ass_9, ass_10, ass_11, dania, diego, alberto, mario)
+
+    
+    if pygame.sprite.collide_rect(mel, arrow_down):
+        bg_group.add(bg_1, bg_2)
+        bg_group.remove(bg_3)
+        sprite_group.add(ass_1, ass_2, ass_3, ass_4, ass_5, ass_6, tah, eb, daniel, arrow_up)
+        sprite_group.remove(arrow_down,arrow_right)
+        ass_1.get_in(), ass_2.get_in(), ass_3.get_in(), ass_4.get_in(), ass_5.get_in(), ass_6.get_in(), eb.get_in(), tah.get_in(), daniel.get_in()
+        mel.door(250, 280)
         
     # Check for Game Over
 
     # Render the Display
-    if INTRO:
-        SALONIM3 = False
-        DISPLAY.blit(main_menu_bg, (0,0))
-        DISPLAY.blit(main_menu_mel, (0, 340))
-        text_group.draw(DISPLAY)
-    elif not INTRO:
-        SALONIM3=True
         DISPLAY.fill(c.BLACK)
-    if SALONIM3:
-        bg_group_1.draw(DISPLAY)
-        sprite_group_1.draw(DISPLAY)
+        bg_group.draw(DISPLAY)
+        sprite_group.draw(DISPLAY)
     pygame.display.update()

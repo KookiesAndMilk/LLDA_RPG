@@ -17,6 +17,9 @@ class BG(pygame.sprite.Sprite):
     def update(self):
         pass
 
+    def scale_by(self, mult_x, mult_y):
+        self.image = pygame.transform.scale_by(self.image, (self.width*mult_x, self.height*mult_y))
+
 class Asset(pygame.sprite.Sprite):
     def __init__(self, file, x, y):
         super(Asset, self).__init__()
@@ -26,9 +29,19 @@ class Asset(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        self.x = x
+        self.y = y
 
     def update(self):
         pass
+
+    def out(self):
+        self.rect.x = 800
+        self.rect.y = 800
+
+    def get_in(self):
+        self.rect.x = self.x
+        self.rect.y = self.y
 
 class NPC(pygame.sprite.Sprite):
     def __init__(self, file, x, y):
@@ -39,7 +52,18 @@ class NPC(pygame.sprite.Sprite):
         self.image.set_colorkey(c.WHITE)
         
         self.rect = self.image.get_rect()
-        self.rect.topleft = (x,y)
+        self.rect.x = x
+        self.x = self.rect.x
+        self.rect.y = y
+        self.y = self.rect.y
 
     def update(self):
         pass 
+
+    def out(self):
+        self.rect.x = 800
+        self.rect.y = 800
+
+    def get_in(self):
+        self.rect.x = self.x
+        self.rect.y = self.y

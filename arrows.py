@@ -12,3 +12,11 @@ class Arrow(pygame.sprite.Sprite):
 
     def update(self):
         pass
+
+    def out(self):
+        self.rect.x = 800
+        self.rect.y = 800
+
+    def get_in(self):
+        self.rect.x = self.x
+        self.rect.y = self.y

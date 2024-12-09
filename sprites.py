@@ -98,6 +98,10 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.vel_x
         self.rect.y += self.vel_y
 
+    def door(self, x, y):
+        self.rect.x = x
+        self.rect.y = y
+
 class Text(pygame.sprite.Sprite):
     def __init__(self, content, font, fg, fs, x, y):
         super(Text, self).__init__()
