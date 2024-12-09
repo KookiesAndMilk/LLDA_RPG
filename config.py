@@ -1,3 +1,8 @@
+import pygame
+from sprites import *
+from background import *
+from arrows import Arrow
+
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 640
 

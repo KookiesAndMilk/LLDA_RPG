@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, colour, spritesheet_file):
         super(Player, self).__init__()
         self.width = 38
-        self.height = 60
+        self.height = 59
         self.colour = colour
         self.spritesheet = Spritesheet(spritesheet_file)
         self.animation_loop = 0
@@ -81,17 +81,17 @@ class Player(pygame.sprite.Sprite):
                 if self.animation_loop >= len(anim):
                     self.animation_loop = 0
 
-    def limits(self):
-                # Limits for Player
-        if self.rect.x <= 120:
-            self.rect.x = 120
-        elif self.rect.x >= 635:
-            self.rect.x =635
+    def limits(self, xa, xb, ya, yb):
+        # Limits for Player
+        if self.rect.x <= xa:
+            self.rect.x = xa
+        elif self.rect.x >= xb:
+            self.rect.x =xb
         
-        if self.rect.y <= 175:
-            self.rect.y = 175
-        elif self.rect.y >= 550:
-            self.rect.y = 550
+        if self.rect.y <= ya:
+            self.rect.y = ya
+        elif self.rect.y >= yb:
+            self.rect.y = yb
 
     def update(self):
         self.animation()
